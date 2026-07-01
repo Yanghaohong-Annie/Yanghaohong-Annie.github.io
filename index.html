@@ -53,7 +53,7 @@
     }
 
     .hero {
-      max-width: 1100px;
+      max-width: 1180px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 180px 1fr;
@@ -84,14 +84,11 @@
       font-size: 46px;
       font-weight: bold;
       color: white;
+      display: none;
     }
 
     .profile-photo.no-photo span {
       display: block;
-    }
-
-    .profile-photo span {
-      display: none;
     }
 
     .hero-text h1 {
@@ -125,6 +122,7 @@
       border-radius: 999px;
       font-weight: bold;
       border: 1px solid transparent;
+      transition: 0.2s ease;
     }
 
     .button.primary {
@@ -135,6 +133,11 @@
     .button.secondary {
       color: white;
       border-color: rgba(255, 255, 255, 0.7);
+    }
+
+    .button.dark {
+      background: var(--navy);
+      color: white;
     }
 
     .button:hover {
@@ -154,7 +157,7 @@
     }
 
     .nav-inner {
-      max-width: 1100px;
+      max-width: 1180px;
       margin: 0 auto;
       padding: 14px 20px;
       display: flex;
@@ -169,11 +172,23 @@
       font-size: 14px;
     }
 
-    /* Main Layout */
-    main {
-      max-width: 1100px;
+    nav a:hover {
+      color: var(--blue);
+    }
+
+    /* Main Layout with Right Timeline */
+    main.page-layout {
+      max-width: 1280px;
       margin: 35px auto;
       padding: 0 20px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 26px;
+      align-items: start;
+    }
+
+    .main-content {
+      min-width: 0;
     }
 
     section {
@@ -197,6 +212,97 @@
       color: var(--muted);
       margin-top: -8px;
       margin-bottom: 20px;
+    }
+
+    /* Timeline Sidebar */
+    .timeline-sidebar {
+      position: sticky;
+      top: 82px;
+      background: white;
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(217, 226, 236, 0.9);
+    }
+
+    .timeline-sidebar h2 {
+      margin: 0 0 10px;
+      color: var(--navy);
+      font-size: 24px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--light-blue);
+    }
+
+    .timeline-intro {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0 0 18px;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 24px;
+      margin-top: 18px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: #d7e6f5;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 22px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -23px;
+      top: 5px;
+      width: 12px;
+      height: 12px;
+      background: var(--navy);
+      border: 3px solid var(--light-blue);
+      border-radius: 50%;
+    }
+
+    .timeline-date {
+      font-size: 13px;
+      font-weight: bold;
+      color: var(--blue);
+      margin-bottom: 4px;
+    }
+
+    .timeline-title {
+      font-size: 15px;
+      font-weight: bold;
+      color: var(--navy);
+      margin-bottom: 4px;
+      line-height: 1.35;
+    }
+
+    .timeline-text {
+      font-size: 14px;
+      color: #52616f;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .timeline-badge {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--light-blue);
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: bold;
     }
 
     /* Cards */
@@ -275,6 +381,7 @@
       background: linear-gradient(90deg, #ffffff, #f4f9ff);
       list-style: none;
       position: relative;
+      padding-right: 52px;
     }
 
     summary::-webkit-details-marker {
@@ -285,7 +392,8 @@
       content: "+";
       position: absolute;
       right: 20px;
-      font-size: 22px;
+      top: 13px;
+      font-size: 24px;
       color: var(--blue);
     }
 
@@ -357,6 +465,7 @@
       border-radius: 14px;
       padding: 18px;
       background: #fbfdff;
+      overflow-wrap: break-word;
     }
 
     .contact-card strong {
@@ -373,6 +482,16 @@
     }
 
     /* Mobile */
+    @media (max-width: 980px) {
+      main.page-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-sidebar {
+        position: static;
+      }
+    }
+
     @media (max-width: 780px) {
       .hero {
         grid-template-columns: 1fr;
@@ -397,7 +516,8 @@
         grid-template-columns: 1fr;
       }
 
-      section {
+      section,
+      .timeline-sidebar {
         padding: 24px 20px;
       }
 
@@ -455,387 +575,458 @@
       <a href="#certificates">Certificates</a>
       <a href="#resume">Resume</a>
       <a href="#contact">Contact</a>
+      <a href="#timeline">Timeline</a>
     </div>
   </nav>
 
-  <main>
+  <main class="page-layout">
 
-    <!-- ABOUT -->
-    <section id="about">
-      <h2>About Me</h2>
-      <p>
-        TBD — Write a short professional introduction here. You can describe your academic background,
-        technical interests, laboratory experience, process engineering skills, and career goals.
-      </p>
+    <div class="main-content">
 
-      <p>
-        Suggested direction: focus on process engineering, laboratory work, technical documentation,
-        safety awareness, data accuracy, and interest in entry-level engineering/laboratory opportunities.
-      </p>
-    </section>
+      <!-- ABOUT -->
+      <section id="about">
+        <h2>About Me</h2>
+        <p>
+          TBD — Write a short professional introduction here. You can describe your academic background,
+          technical interests, laboratory experience, process engineering skills, and career goals.
+        </p>
 
-    <!-- EDUCATION -->
-    <section id="education">
-      <h2>Education</h2>
-      <p class="section-intro">
-        Add school photos, graduation photos, project images, or campus-related images here.
-      </p>
+        <p>
+          Suggested direction: focus on process engineering, laboratory work, technical documentation,
+          safety awareness, data accuracy, and interest in entry-level engineering/laboratory opportunities.
+        </p>
+      </section>
 
-      <div class="card-grid">
-        <div class="card">
-          <div class="image-box">
-            <img 
-              src="assets/images/education-ubc.jpg" 
-              alt="Education image"
-              onerror="this.style.display='none';"
-            />
-            <span class="placeholder-text">
-              Upload image: assets/images/education-ubc.jpg
-            </span>
-          </div>
+      <!-- EDUCATION -->
+      <section id="education">
+        <h2>Education</h2>
+        <p class="section-intro">
+          Add school photos, graduation photos, project images, or campus-related images here.
+        </p>
 
-          <div class="card-content">
-            <h3>University of British Columbia</h3>
-            <p class="meta">BASc, Chemical and Biological Engineering | TBD</p>
-            <p>
-              TBD — Add degree information, academic focus, relevant coursework,
-              laboratory courses, capstone project, and graduation information.
-            </p>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="image-box">
-            <img 
-              src="assets/images/education-extra.jpg" 
-              alt="Additional education image"
-              onerror="this.style.display='none';"
-            />
-            <span class="placeholder-text">
-              Upload image: assets/images/education-extra.jpg
-            </span>
-          </div>
-
-          <div class="card-content">
-            <h3>Additional Education / Training</h3>
-            <p class="meta">TBD</p>
-            <p>
-              TBD — Add any exchange experience, online training, professional courses,
-              or academic achievements.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section id="experience">
-      <h2>Experience</h2>
-      <p class="section-intro">
-        Click each bar to expand details. Each experience can include an image.
-      </p>
-
-      <details>
-        <summary>Production Process Technician Intern — Yongxiu Ganyu Non-Ferrous Metal Recycling Co., Ltd.</summary>
-        <div class="details-body">
-          <div class="details-layout">
+        <div class="card-grid">
+          <div class="card">
             <div class="image-box">
               <img 
-                src="assets/images/experience-internship.jpg" 
-                alt="Internship experience image"
+                src="assets/images/education-ubc.jpg" 
+                alt="Education image"
                 onerror="this.style.display='none';"
               />
               <span class="placeholder-text">
-                Upload image: assets/images/experience-internship.jpg
+                Upload image: assets/images/education-ubc.jpg
               </span>
             </div>
 
-            <div>
-              <p class="meta">TBD — Add dates and location</p>
-              <ul>
-                <li>TBD — Supported process monitoring and production data review.</li>
-                <li>TBD — Assisted with equipment inspection and workflow improvement.</li>
-                <li>TBD — Followed safety and quality procedures in a production environment.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </details>
-
-      <details>
-        <summary>TBD Experience Title</summary>
-        <div class="details-body">
-          <div class="details-layout">
-            <div class="image-box">
-              <img 
-                src="assets/images/experience-2.jpg" 
-                alt="Experience image"
-                onerror="this.style.display='none';"
-              />
-              <span class="placeholder-text">
-                Upload image: assets/images/experience-2.jpg
-              </span>
-            </div>
-
-            <div>
-              <p class="meta">TBD — Company / Date / Location</p>
-              <ul>
-                <li>TBD — Add responsibility or achievement.</li>
-                <li>TBD — Add responsibility or achievement.</li>
-                <li>TBD — Add responsibility or achievement.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </details>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects">
-      <h2>Projects</h2>
-      <p class="section-intro">
-        Click each project bar to expand details. Add diagrams, process flows, equipment images, or presentation screenshots.
-      </p>
-
-      <details>
-        <summary>Green Diesel Production Facility — UBC Capstone</summary>
-        <div class="details-body">
-          <div class="details-layout">
-            <div class="image-box">
-              <img 
-                src="assets/images/project-green-diesel.jpg" 
-                alt="Green diesel project image"
-                onerror="this.style.display='none';"
-              />
-              <span class="placeholder-text">
-                Upload image: assets/images/project-green-diesel.jpg
-              </span>
-            </div>
-
-            <div>
-              <p class="meta">Process Design | Renewable Diesel | Engineering Documentation</p>
-              <ul>
-                <li>TBD — Designed a waste-oil-to-renewable-diesel process.</li>
-                <li>TBD — Developed BFDs, PFDs, P&IDs, and process documentation.</li>
-                <li>TBD — Supported equipment selection, safety review, and feasibility analysis.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </details>
-
-      <details>
-        <summary>Exergoeconomic CHP Analysis</summary>
-        <div class="details-body">
-          <div class="details-layout">
-            <div class="image-box">
-              <img 
-                src="assets/images/project-chp.jpg" 
-                alt="CHP project image"
-                onerror="this.style.display='none';"
-              />
-              <span class="placeholder-text">
-                Upload image: assets/images/project-chp.jpg
-              </span>
-            </div>
-
-            <div>
-              <p class="meta">Thermodynamics | Cost Analysis | Energy System</p>
-              <ul>
-                <li>TBD — Replicated a diesel engine combined heat and power system.</li>
-                <li>TBD — Conducted thermodynamic and exergoeconomic analysis.</li>
-                <li>TBD — Compared system performance and cost distribution.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </details>
-
-      <details>
-        <summary>Carbon Capture Business Case</summary>
-        <div class="details-body">
-          <div class="details-layout">
-            <div class="image-box">
-              <img 
-                src="assets/images/project-carbon-capture.jpg" 
-                alt="Carbon capture project image"
-                onerror="this.style.display='none';"
-              />
-              <span class="placeholder-text">
-                Upload image: assets/images/project-carbon-capture.jpg
-              </span>
-            </div>
-
-            <div>
-              <p class="meta">CAPEX/OPEX | Carbon Pricing | Feasibility Analysis</p>
-              <ul>
-                <li>TBD — Evaluated an on-site carbon capture business case.</li>
-                <li>TBD — Estimated capital cost, operating cost, and potential carbon-credit benefit.</li>
-                <li>TBD — Assessed project feasibility using economic assumptions.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </details>
-    </section>
-
-    <!-- SKILLS -->
-    <section id="skills">
-      <h2>Skills</h2>
-      <p class="section-intro">
-        Add technical, laboratory, engineering, software, and communication skills here.
-      </p>
-
-      <div class="tag-list">
-        <span class="tag">Process Engineering</span>
-        <span class="tag">Laboratory Analysis</span>
-        <span class="tag">Sample Preparation</span>
-        <span class="tag">PFD / P&ID</span>
-        <span class="tag">HAZOP</span>
-        <span class="tag">CAPEX / OPEX</span>
-        <span class="tag">AutoCAD</span>
-        <span class="tag">Microsoft Visio</span>
-        <span class="tag">Aspen / HYSYS</span>
-        <span class="tag">Python</span>
-        <span class="tag">MATLAB</span>
-        <span class="tag">Data Review</span>
-        <span class="tag">SOP Compliance</span>
-        <span class="tag">Safety Awareness</span>
-        <span class="tag">TBD</span>
-      </div>
-    </section>
-
-    <!-- CERTIFICATES -->
-    <section id="certificates">
-      <h2>Certificates</h2>
-      <p class="section-intro">
-        Click each certificate bar to expand details and view the certificate image.
-      </p>
-
-      <details>
-        <summary>WHMIS Certificate</summary>
-        <div class="details-body">
-          <div class="details-layout">
-            <div class="image-box">
-              <img 
-                src="assets/images/certificate-whmis.jpg" 
-                alt="WHMIS certificate image"
-                onerror="this.style.display='none';"
-              />
-              <span class="placeholder-text">
-                Upload image: assets/images/certificate-whmis.jpg
-              </span>
-            </div>
-
-            <div>
-              <p class="meta">Workplace Hazardous Materials Information System</p>
+            <div class="card-content">
+              <h3>University of British Columbia</h3>
+              <p class="meta">BASc, Chemical and Biological Engineering | TBD</p>
               <p>
-                TBD — Add certificate date, provider, and a short explanation of the training.
+                TBD — Add degree information, academic focus, relevant coursework,
+                laboratory courses, capstone project, and graduation information.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="image-box">
+              <img 
+                src="assets/images/education-extra.jpg" 
+                alt="Additional education image"
+                onerror="this.style.display='none';"
+              />
+              <span class="placeholder-text">
+                Upload image: assets/images/education-extra.jpg
+              </span>
+            </div>
+
+            <div class="card-content">
+              <h3>Additional Education / Training</h3>
+              <p class="meta">TBD</p>
+              <p>
+                TBD — Add any exchange experience, online training, professional courses,
+                or academic achievements.
               </p>
             </div>
           </div>
         </div>
-      </details>
+      </section>
 
-      <details>
-        <summary>TBD Certificate</summary>
-        <div class="details-body">
-          <div class="details-layout">
-            <div class="image-box">
-              <img 
-                src="assets/images/certificate-2.jpg" 
-                alt="Certificate image"
-                onerror="this.style.display='none';"
-              />
-              <span class="placeholder-text">
-                Upload image: assets/images/certificate-2.jpg
-              </span>
-            </div>
+      <!-- EXPERIENCE -->
+      <section id="experience">
+        <h2>Experience</h2>
+        <p class="section-intro">
+          Click each bar to expand details. Each experience can include an image.
+        </p>
 
-            <div>
-              <p class="meta">TBD — Certificate provider and date</p>
-              <p>
-                TBD — Add certificate description here.
-              </p>
-            </div>
-          </div>
-        </div>
-      </details>
-    </section>
+        <details>
+          <summary>Production Process Technician Intern — Yongxiu Ganyu Non-Ferrous Metal Recycling Co., Ltd.</summary>
+          <div class="details-body">
+            <div class="details-layout">
+              <div class="image-box">
+                <img 
+                  src="assets/images/experience-internship.jpg" 
+                  alt="Internship experience image"
+                  onerror="this.style.display='none';"
+                />
+                <span class="placeholder-text">
+                  Upload image: assets/images/experience-internship.jpg
+                </span>
+              </div>
 
-    <!-- RESUME -->
-    <section id="resume">
-      <h2>Resume</h2>
-      <p class="section-intro">
-        Click the bar to expand resume details. Upload your resume PDF and optional resume preview image.
-      </p>
-
-      <details>
-        <summary>Yanghaohong Annie Zeng — Resume</summary>
-        <div class="details-body">
-          <div class="details-layout">
-            <div class="image-box">
-              <img 
-                src="assets/images/resume-preview.jpg" 
-                alt="Resume preview image"
-                onerror="this.style.display='none';"
-              />
-              <span class="placeholder-text">
-                Upload image: assets/images/resume-preview.jpg
-              </span>
-            </div>
-
-            <div>
-              <p>
-                TBD — Add a short note about your resume, target roles, or current job-search focus.
-              </p>
-
-              <div class="resume-actions">
-                <a 
-                  class="button primary" 
-                  href="assets/resume/Yanghaohong_Annie_Zeng_Resume.pdf" 
-                  target="_blank"
-                >
-                  View / Download Resume
-                </a>
-
-                <a class="button secondary" href="#contact" style="background:#12355b;">
-                  Contact Me
-                </a>
+              <div>
+                <p class="meta">July 2023 – September 2023 | TBD Location</p>
+                <ul>
+                  <li>Supported process monitoring and production data review.</li>
+                  <li>Assisted with equipment inspection and workflow improvement.</li>
+                  <li>Followed safety and quality procedures in a production environment.</li>
+                </ul>
               </div>
             </div>
           </div>
-        </div>
-      </details>
-    </section>
+        </details>
 
-    <!-- CONTACT -->
-    <section id="contact">
-      <h2>Contact</h2>
+        <details>
+          <summary>TBD Experience Title</summary>
+          <div class="details-body">
+            <div class="details-layout">
+              <div class="image-box">
+                <img 
+                  src="assets/images/experience-2.jpg" 
+                  alt="Experience image"
+                  onerror="this.style.display='none';"
+                />
+                <span class="placeholder-text">
+                  Upload image: assets/images/experience-2.jpg
+                </span>
+              </div>
 
-      <div class="contact-grid">
-        <div class="contact-card">
-          <strong>Email</strong>
-          <a href="mailto:yanghaohongzeng@gmail.com">
-            yanghaohongzeng@gmail.com
-          </a>
+              <div>
+                <p class="meta">TBD — Company / Date / Location</p>
+                <ul>
+                  <li>TBD — Add responsibility or achievement.</li>
+                  <li>TBD — Add responsibility or achievement.</li>
+                  <li>TBD — Add responsibility or achievement.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects">
+        <h2>Projects</h2>
+        <p class="section-intro">
+          Click each project bar to expand details. Add diagrams, process flows, equipment images, or presentation screenshots.
+        </p>
+
+        <details>
+          <summary>Green Diesel Production Facility — UBC Capstone</summary>
+          <div class="details-body">
+            <div class="details-layout">
+              <div class="image-box">
+                <img 
+                  src="assets/images/project-green-diesel.jpg" 
+                  alt="Green diesel project image"
+                  onerror="this.style.display='none';"
+                />
+                <span class="placeholder-text">
+                  Upload image: assets/images/project-green-diesel.jpg
+                </span>
+              </div>
+
+              <div>
+                <p class="meta">Process Design | Renewable Diesel | Engineering Documentation</p>
+                <ul>
+                  <li>Designed a waste-oil-to-renewable-diesel process.</li>
+                  <li>Developed BFDs, PFDs, P&IDs, and process documentation.</li>
+                  <li>Supported equipment selection, safety review, and feasibility analysis.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>Exergoeconomic CHP Analysis</summary>
+          <div class="details-body">
+            <div class="details-layout">
+              <div class="image-box">
+                <img 
+                  src="assets/images/project-chp.jpg" 
+                  alt="CHP project image"
+                  onerror="this.style.display='none';"
+                />
+                <span class="placeholder-text">
+                  Upload image: assets/images/project-chp.jpg
+                </span>
+              </div>
+
+              <div>
+                <p class="meta">Thermodynamics | Cost Analysis | Energy System</p>
+                <ul>
+                  <li>Replicated a diesel engine combined heat and power system.</li>
+                  <li>Conducted thermodynamic and exergoeconomic analysis.</li>
+                  <li>Compared system performance and cost distribution.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>Carbon Capture Business Case</summary>
+          <div class="details-body">
+            <div class="details-layout">
+              <div class="image-box">
+                <img 
+                  src="assets/images/project-carbon-capture.jpg" 
+                  alt="Carbon capture project image"
+                  onerror="this.style.display='none';"
+                />
+                <span class="placeholder-text">
+                  Upload image: assets/images/project-carbon-capture.jpg
+                </span>
+              </div>
+
+              <div>
+                <p class="meta">CAPEX/OPEX | Carbon Pricing | Feasibility Analysis</p>
+                <ul>
+                  <li>Evaluated an on-site carbon capture business case.</li>
+                  <li>Estimated capital cost, operating cost, and potential carbon-credit benefit.</li>
+                  <li>Assessed project feasibility using economic assumptions.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills">
+        <h2>Skills</h2>
+        <p class="section-intro">
+          Add technical, laboratory, engineering, software, and communication skills here.
+        </p>
+
+        <div class="tag-list">
+          <span class="tag">Process Engineering</span>
+          <span class="tag">Laboratory Analysis</span>
+          <span class="tag">Sample Preparation</span>
+          <span class="tag">PFD / P&ID</span>
+          <span class="tag">HAZOP</span>
+          <span class="tag">CAPEX / OPEX</span>
+          <span class="tag">AutoCAD</span>
+          <span class="tag">Microsoft Visio</span>
+          <span class="tag">Aspen / HYSYS</span>
+          <span class="tag">Python</span>
+          <span class="tag">MATLAB</span>
+          <span class="tag">Data Review</span>
+          <span class="tag">SOP Compliance</span>
+          <span class="tag">Safety Awareness</span>
+          <span class="tag">TBD</span>
+        </div>
+      </section>
+
+      <!-- CERTIFICATES -->
+      <section id="certificates">
+        <h2>Certificates</h2>
+        <p class="section-intro">
+          Click each certificate bar to expand details and view the certificate image.
+        </p>
+
+        <details>
+          <summary>WHMIS Certificate</summary>
+          <div class="details-body">
+            <div class="details-layout">
+              <div class="image-box">
+                <img 
+                  src="assets/images/certificate-whmis.jpg" 
+                  alt="WHMIS certificate image"
+                  onerror="this.style.display='none';"
+                />
+                <span class="placeholder-text">
+                  Upload image: assets/images/certificate-whmis.jpg
+                </span>
+              </div>
+
+              <div>
+                <p class="meta">Workplace Hazardous Materials Information System</p>
+                <p>
+                  TBD — Add certificate date, provider, and a short explanation of the training.
+                </p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>TBD Certificate</summary>
+          <div class="details-body">
+            <div class="details-layout">
+              <div class="image-box">
+                <img 
+                  src="assets/images/certificate-2.jpg" 
+                  alt="Certificate image"
+                  onerror="this.style.display='none';"
+                />
+                <span class="placeholder-text">
+                  Upload image: assets/images/certificate-2.jpg
+                </span>
+              </div>
+
+              <div>
+                <p class="meta">TBD — Certificate provider and date</p>
+                <p>
+                  TBD — Add certificate description here.
+                </p>
+              </div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- RESUME -->
+      <section id="resume">
+        <h2>Resume</h2>
+        <p class="section-intro">
+          Click the bar to expand resume details. Upload your resume PDF and optional resume preview image.
+        </p>
+
+        <details>
+          <summary>Yanghaohong Annie Zeng — Resume</summary>
+          <div class="details-body">
+            <div class="details-layout">
+              <div class="image-box">
+                <img 
+                  src="assets/images/resume-preview.jpg" 
+                  alt="Resume preview image"
+                  onerror="this.style.display='none';"
+                />
+                <span class="placeholder-text">
+                  Upload image: assets/images/resume-preview.jpg
+                </span>
+              </div>
+
+              <div>
+                <p>
+                  TBD — Add a short note about your resume, target roles, or current job-search focus.
+                </p>
+
+                <div class="resume-actions">
+                  <a 
+                    class="button dark" 
+                    href="assets/resume/Yanghaohong_Annie_Zeng_Resume.pdf" 
+                    target="_blank"
+                  >
+                    View / Download Resume
+                  </a>
+
+                  <a class="button dark" href="#contact">
+                    Contact Me
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <h2>Contact</h2>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <strong>Email</strong>
+            <a href="mailto:yanghaohongzeng@gmail.com">
+              yanghaohongzeng@gmail.com
+            </a>
+          </div>
+
+          <div class="contact-card">
+            <strong>LinkedIn</strong>
+            <a href="https://www.linkedin.com/in/annie-zeng-706114220/" target="_blank" rel="noopener noreferrer">
+              Annie Zeng
+            </a>
+          </div>
+
+          <div class="contact-card">
+            <strong>GitHub</strong>
+            <a href="https://github.com/Yanghaohong-Annie" target="_blank" rel="noopener noreferrer">
+              Yanghaohong-Annie
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- RIGHT TIMELINE SIDEBAR -->
+    <aside class="timeline-sidebar" id="timeline">
+      <h2>Timeline</h2>
+      <p class="timeline-intro">
+        A brief overview of my academic, project, and professional milestones.
+      </p>
+
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-date">June 2026</div>
+          <div class="timeline-title">Built Personal Portfolio Website</div>
+          <p class="timeline-text">
+            Started building a professional GitHub Pages website for job applications and project presentation.
+          </p>
+          <span class="timeline-badge">Personal Website</span>
         </div>
 
-        <div class="contact-card">
-          <strong>LinkedIn</strong>
-          <a href="https://www.linkedin.com/in/annie-zeng-706114220/" target="_blank" rel="noopener noreferrer">
-            Annie Zeng
-          </a>
+        <div class="timeline-item">
+          <div class="timeline-date">May 2026</div>
+          <div class="timeline-title">Graduated from UBC</div>
+          <p class="timeline-text">
+            Completed BASc studies in Chemical and Biological Engineering.
+          </p>
+          <span class="timeline-badge">Education</span>
         </div>
 
-        <div class="contact-card">
-          <strong>GitHub</strong>
-          <a href="https://github.com/Yanghaohong-Annie" target="_blank" rel="noopener noreferrer">
-            Yanghaohong-Annie
-          </a>
+        <div class="timeline-item">
+          <div class="timeline-date">Spring 2026</div>
+          <div class="timeline-title">Completed UBC Capstone Project</div>
+          <p class="timeline-text">
+            Developed a green diesel production facility design with process documentation and feasibility analysis.
+          </p>
+          <span class="timeline-badge">Capstone</span>
         </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">2026</div>
+          <div class="timeline-title">Completed CHP Analysis Project</div>
+          <p class="timeline-text">
+            Conducted thermodynamic and exergoeconomic analysis of a diesel engine CHP system.
+          </p>
+          <span class="timeline-badge">Energy Analysis</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">2026</div>
+          <div class="timeline-title">Completed Carbon Capture Business Case</div>
+          <p class="timeline-text">
+            Evaluated CAPEX, OPEX, carbon pricing, and feasibility for an on-site carbon capture project.
+          </p>
+          <span class="timeline-badge">Business Case</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">July – Sept 2023</div>
+          <div class="timeline-title">Production Process Technician Intern</div>
+          <p class="timeline-text">
+            Supported process monitoring, equipment inspection, workflow improvement, and safety procedures.
+          </p>
+          <span class="timeline-badge">Internship</span>
+        </div>
+
       </div>
-    </section>
+    </aside>
 
   </main>
 
