@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- =========================================================
+       BASIC PAGE SETTINGS
+       页面基础设置：编码、手机适配、网页标题
+  ========================================================== -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Yanghaohong Annie Zeng | Personal Portfolio</title>
 
   <style>
+    /* =========================================================
+       GLOBAL COLOR VARIABLES
+       全局颜色变量：以后想换网站主题色，优先改这里
+    ========================================================== */
     :root {
       --navy: #12355b;
       --blue: #1f6fb2;
@@ -20,6 +28,10 @@
       --radius: 16px;
     }
 
+    /* =========================================================
+       GLOBAL RESET
+       全局基础样式：让所有元素尺寸计算更稳定
+    ========================================================== */
     * {
       box-sizing: border-box;
     }
@@ -45,6 +57,10 @@
       text-decoration: underline;
     }
 
+    /* =========================================================
+       HEADER / HERO SECTION
+       顶部个人介绍区：头像、姓名、标题、简介、按钮
+    ========================================================== */
     header {
       background: linear-gradient(135deg, #12355b, #1f6fb2);
       color: white;
@@ -60,6 +76,7 @@
       align-items: center;
     }
 
+    /* 头像圆形框 */
     .profile-photo {
       width: 180px;
       height: 180px;
@@ -73,12 +90,14 @@
       box-shadow: var(--shadow);
     }
 
+    /* 头像图片显示方式 */
     .profile-photo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
+    /* 如果头像图片不存在，会显示 AZ 占位文字 */
     .profile-photo span {
       font-size: 46px;
       font-weight: bold;
@@ -109,12 +128,14 @@
       font-size: 16px;
     }
 
+    /* 顶部按钮区域 */
     .hero-buttons {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
     }
 
+    /* 通用按钮样式 */
     .button {
       display: inline-block;
       padding: 11px 18px;
@@ -144,6 +165,10 @@
       transform: translateY(-1px);
     }
 
+    /* =========================================================
+       NAVIGATION BAR
+       顶部导航栏：点击后跳转到对应页面区块
+    ========================================================== */
     nav {
       position: sticky;
       top: 0;
@@ -174,6 +199,10 @@
       color: var(--blue);
     }
 
+    /* =========================================================
+       MAIN PAGE LAYOUT
+       页面主体布局：左边主内容 + 右边 Timeline 侧边栏
+    ========================================================== */
     main.page-layout {
       max-width: 1280px;
       margin: 35px auto;
@@ -188,6 +217,10 @@
       min-width: 0;
     }
 
+    /* =========================================================
+       GENERAL SECTION STYLE
+       通用内容卡片样式：About / Education / Experience 等都使用
+    ========================================================== */
     section {
       background: white;
       border-radius: var(--radius);
@@ -211,7 +244,10 @@
       margin-bottom: 20px;
     }
 
-    /* Right Timeline Sidebar */
+    /* =========================================================
+       RIGHT TIMELINE SIDEBAR
+       右侧时间线栏：固定在右侧，鼠标移上去后可单独滚动
+    ========================================================== */
     .timeline-sidebar {
       position: sticky;
       top: 82px;
@@ -221,7 +257,10 @@
       box-shadow: var(--shadow);
       border: 1px solid rgba(217, 226, 236, 0.9);
 
+      /* 控制右侧栏最大高度，避免超过屏幕 */
       max-height: calc(100vh - 105px);
+
+      /* 使用 flex，让标题固定，下面 timeline 区域滚动 */
       display: flex;
       flex-direction: column;
     }
@@ -242,6 +281,7 @@
       flex-shrink: 0;
     }
 
+    /* Timeline 内部滚动区域 */
     .timeline-scroll {
       overflow-y: hidden;
       padding-right: 6px;
@@ -250,6 +290,7 @@
       scrollbar-width: none;
     }
 
+    /* 鼠标移到 Timeline 上时，允许右侧栏内部滚动 */
     .timeline-sidebar:hover .timeline-scroll,
     .timeline-sidebar:focus-within .timeline-scroll {
       overflow-y: auto;
@@ -257,6 +298,7 @@
       scrollbar-color: #b7d3ef #f0f6fc;
     }
 
+    /* Chrome / Edge / Safari 滚动条样式 */
     .timeline-scroll::-webkit-scrollbar {
       width: 6px;
     }
@@ -275,6 +317,7 @@
       background: var(--blue);
     }
 
+    /* Timeline 主线 */
     .timeline {
       position: relative;
       padding-left: 24px;
@@ -291,11 +334,13 @@
       background: #d7e6f5;
     }
 
+    /* 每一个 Timeline 项目 */
     .timeline-item {
       position: relative;
       margin-bottom: 22px;
     }
 
+    /* Timeline 圆点 */
     .timeline-item::before {
       content: "";
       position: absolute;
@@ -341,6 +386,10 @@
       font-weight: bold;
     }
 
+    /* =========================================================
+       EDUCATION CARD GRID
+       Education 区域的两列卡片布局
+    ========================================================== */
     .card-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -371,6 +420,10 @@
       font-weight: bold;
     }
 
+    /* =========================================================
+       IMAGE PLACEHOLDER BOX
+       图片区域：用于头像以外的 Education / Experience / Projects / Certificates / Resume 图片
+    ========================================================== */
     .image-box {
       min-height: 190px;
       background: linear-gradient(135deg, #eaf4ff, #f8fbff);
@@ -399,6 +452,10 @@
       z-index: 1;
     }
 
+    /* =========================================================
+       COLLAPSIBLE DETAILS BAR
+       可展开隐藏栏：Experience / Projects / Certificates / Resume 使用
+    ========================================================== */
     details {
       border: 1px solid var(--border);
       border-radius: 14px;
@@ -421,6 +478,7 @@
       display: none;
     }
 
+    /* 展开栏右侧的 + 号 */
     summary::after {
       content: "+";
       position: absolute;
@@ -430,6 +488,7 @@
       color: var(--blue);
     }
 
+    /* 展开后 + 号变成 − 号 */
     details[open] summary::after {
       content: "−";
     }
@@ -439,6 +498,7 @@
       border-top: 1px solid var(--border);
     }
 
+    /* 展开内容内部：左边图片，右边文字 */
     .details-layout {
       display: grid;
       grid-template-columns: 260px 1fr;
@@ -461,6 +521,10 @@
       padding-left: 20px;
     }
 
+    /* =========================================================
+       SKILLS TAGS
+       技能标签：Skills 区域的小圆角标签
+    ========================================================== */
     .tag-list {
       display: flex;
       flex-wrap: wrap;
@@ -478,6 +542,10 @@
       font-weight: bold;
     }
 
+    /* =========================================================
+       RESUME BUTTONS
+       Resume 区域按钮布局
+    ========================================================== */
     .resume-actions {
       display: flex;
       flex-wrap: wrap;
@@ -485,6 +553,10 @@
       margin-top: 16px;
     }
 
+    /* =========================================================
+       CONTACT CARDS
+       Contact 区域：Email / LinkedIn / GitHub 三张卡片
+    ========================================================== */
     .contact-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -505,6 +577,10 @@
       margin-bottom: 6px;
     }
 
+    /* =========================================================
+       FOOTER
+       页面底部版权信息
+    ========================================================== */
     footer {
       text-align: center;
       padding: 28px 20px;
@@ -512,6 +588,10 @@
       font-size: 14px;
     }
 
+    /* =========================================================
+       RESPONSIVE DESIGN: TABLET
+       平板/窄屏适配：右侧 Timeline 改为单列显示
+    ========================================================== */
     @media (max-width: 980px) {
       main.page-layout {
         grid-template-columns: 1fr;
@@ -533,6 +613,10 @@
       }
     }
 
+    /* =========================================================
+       RESPONSIVE DESIGN: MOBILE
+       手机端适配：头像居中，卡片和联系信息变成单列
+    ========================================================== */
     @media (max-width: 780px) {
       .hero {
         grid-template-columns: 1fr;
@@ -575,8 +659,16 @@
 
 <body>
 
+  <!-- =========================================================
+       HEADER / HERO SECTION
+       顶部区域：头像、姓名、专业标题、简介、Resume 和 Contact 按钮
+  ========================================================== -->
   <header>
     <div class="hero">
+
+      <!-- PROFILE PHOTO
+           头像图片路径：assets/images/profile.jpg
+           如果图片不存在，会自动显示 AZ -->
       <div class="profile-photo">
         <img 
           src="assets/images/profile.jpg" 
@@ -586,6 +678,8 @@
         <span>AZ</span>
       </div>
 
+      <!-- HERO TEXT
+           这里改姓名、标题、个人简介 -->
       <div class="hero-text">
         <h1>Yanghaohong (Annie) Zeng</h1>
         <p class="subtitle">UBC BASc | Process Engineering Graduate</p>
@@ -594,6 +688,8 @@
           for job applications, graduate school opportunities, personal updates, and project presentation.
         </p>
 
+        <!-- HERO BUTTONS
+             Resume PDF 路径：assets/resume/Yanghaohong_Annie_Zeng_Resume.pdf -->
         <div class="hero-buttons">
           <a class="button primary" href="assets/resume/Yanghaohong_Annie_Zeng_Resume.pdf" target="_blank">
             Download Resume
@@ -603,9 +699,14 @@
           </a>
         </div>
       </div>
+
     </div>
   </header>
 
+  <!-- =========================================================
+       NAVIGATION BAR
+       导航栏：href="#about" 会跳转到 id="about" 的区块
+  ========================================================== -->
   <nav>
     <div class="nav-inner">
       <a href="#about">About</a>
@@ -620,10 +721,22 @@
     </div>
   </nav>
 
+  <!-- =========================================================
+       MAIN PAGE LAYOUT
+       页面主体：左侧 main-content + 右侧 timeline-sidebar
+  ========================================================== -->
   <main class="page-layout">
 
+    <!-- =======================================================
+         LEFT MAIN CONTENT
+         左侧主内容区：About / Education / Experience / Projects / Skills / Certificates / Resume / Contact
+    ======================================================== -->
     <div class="main-content">
 
+      <!-- =====================================================
+           ABOUT SECTION
+           About Me：个人介绍
+      ====================================================== -->
       <section id="about">
         <h2>About Me</h2>
         <p>
@@ -637,6 +750,10 @@
         </p>
       </section>
 
+      <!-- =====================================================
+           EDUCATION SECTION
+           Education：教育背景，包含图片卡片
+      ====================================================== -->
       <section id="education">
         <h2>Education</h2>
         <p class="section-intro">
@@ -644,6 +761,10 @@
         </p>
 
         <div class="card-grid">
+
+          <!-- EDUCATION CARD 1
+               UBC 教育背景卡片
+               图片路径：assets/images/education-ubc.jpg -->
           <div class="card">
             <div class="image-box">
               <img 
@@ -666,6 +787,9 @@
             </div>
           </div>
 
+          <!-- EDUCATION CARD 2
+               额外教育/培训卡片
+               图片路径：assets/images/education-extra.jpg -->
           <div class="card">
             <div class="image-box">
               <img 
@@ -687,19 +811,28 @@
               </p>
             </div>
           </div>
+
         </div>
       </section>
 
+      <!-- =====================================================
+           EXPERIENCE SECTION
+           Experience：工作/实习经历，每条经历是可展开隐藏栏
+      ====================================================== -->
       <section id="experience">
         <h2>Experience</h2>
         <p class="section-intro">
           Click each bar to expand details. Each experience can include an image.
         </p>
 
+        <!-- EXPERIENCE ITEM 1
+             可展开经历：Production Process Technician Intern
+             图片路径：assets/images/experience-internship.jpg -->
         <details>
           <summary>Production Process Technician Intern — Yongxiu Ganyu Non-Ferrous Metal Recycling Co., Ltd.</summary>
           <div class="details-body">
             <div class="details-layout">
+
               <div class="image-box">
                 <img 
                   src="assets/images/experience-internship.jpg" 
@@ -719,14 +852,18 @@
                   <li>Followed safety and quality procedures in a production environment.</li>
                 </ul>
               </div>
+
             </div>
           </div>
         </details>
 
+        <!-- EXPERIENCE ITEM 2
+             备用经历栏：以后可以复制这个 details，添加更多经历 -->
         <details>
           <summary>TBD Experience Title</summary>
           <div class="details-body">
             <div class="details-layout">
+
               <div class="image-box">
                 <img 
                   src="assets/images/experience-2.jpg" 
@@ -746,21 +883,30 @@
                   <li>TBD — Add responsibility or achievement.</li>
                 </ul>
               </div>
+
             </div>
           </div>
         </details>
       </section>
 
+      <!-- =====================================================
+           PROJECTS SECTION
+           Projects：项目经历，每个项目是可展开隐藏栏
+      ====================================================== -->
       <section id="projects">
         <h2>Projects</h2>
         <p class="section-intro">
           Click each project bar to expand details. Add diagrams, process flows, equipment images, or presentation screenshots.
         </p>
 
+        <!-- PROJECT ITEM 1
+             Green Diesel Capstone 项目
+             图片路径：assets/images/project-green-diesel.jpg -->
         <details>
           <summary>Green Diesel Production Facility — UBC Capstone</summary>
           <div class="details-body">
             <div class="details-layout">
+
               <div class="image-box">
                 <img 
                   src="assets/images/project-green-diesel.jpg" 
@@ -780,14 +926,19 @@
                   <li>Supported equipment selection, safety review, and feasibility analysis.</li>
                 </ul>
               </div>
+
             </div>
           </div>
         </details>
 
+        <!-- PROJECT ITEM 2
+             CHP Analysis 项目
+             图片路径：assets/images/project-chp.jpg -->
         <details>
           <summary>Exergoeconomic CHP Analysis</summary>
           <div class="details-body">
             <div class="details-layout">
+
               <div class="image-box">
                 <img 
                   src="assets/images/project-chp.jpg" 
@@ -807,14 +958,19 @@
                   <li>Compared system performance and cost distribution.</li>
                 </ul>
               </div>
+
             </div>
           </div>
         </details>
 
+        <!-- PROJECT ITEM 3
+             Carbon Capture Business Case 项目
+             图片路径：assets/images/project-carbon-capture.jpg -->
         <details>
           <summary>Carbon Capture Business Case</summary>
           <div class="details-body">
             <div class="details-layout">
+
               <div class="image-box">
                 <img 
                   src="assets/images/project-carbon-capture.jpg" 
@@ -834,17 +990,24 @@
                   <li>Assessed project feasibility using economic assumptions.</li>
                 </ul>
               </div>
+
             </div>
           </div>
         </details>
       </section>
 
+      <!-- =====================================================
+           SKILLS SECTION
+           Skills：技能标签区
+      ====================================================== -->
       <section id="skills">
         <h2>Skills</h2>
         <p class="section-intro">
           Add technical, laboratory, engineering, software, and communication skills here.
         </p>
 
+        <!-- SKILL TAGS
+             想增加技能：复制一行 <span class="tag">New Skill</span> -->
         <div class="tag-list">
           <span class="tag">Process Engineering</span>
           <span class="tag">Laboratory Analysis</span>
@@ -864,16 +1027,24 @@
         </div>
       </section>
 
+      <!-- =====================================================
+           CERTIFICATES SECTION
+           Certificates：证书区，每个证书是可展开隐藏栏
+      ====================================================== -->
       <section id="certificates">
         <h2>Certificates</h2>
         <p class="section-intro">
           Click each certificate bar to expand details and view the certificate image.
         </p>
 
+        <!-- CERTIFICATE ITEM 1
+             WHMIS 证书
+             图片路径：assets/images/certificate-whmis.jpg -->
         <details>
           <summary>WHMIS Certificate</summary>
           <div class="details-body">
             <div class="details-layout">
+
               <div class="image-box">
                 <img 
                   src="assets/images/certificate-whmis.jpg" 
@@ -891,14 +1062,18 @@
                   TBD — Add certificate date, provider, and a short explanation of the training.
                 </p>
               </div>
+
             </div>
           </div>
         </details>
 
+        <!-- CERTIFICATE ITEM 2
+             备用证书栏：可以复制这个 details 添加更多证书 -->
         <details>
           <summary>TBD Certificate</summary>
           <div class="details-body">
             <div class="details-layout">
+
               <div class="image-box">
                 <img 
                   src="assets/images/certificate-2.jpg" 
@@ -916,21 +1091,30 @@
                   TBD — Add certificate description here.
                 </p>
               </div>
+
             </div>
           </div>
         </details>
       </section>
 
+      <!-- =====================================================
+           RESUME SECTION
+           Resume：简历下载区，包含可展开隐藏栏、简历预览图、下载按钮
+      ====================================================== -->
       <section id="resume">
         <h2>Resume</h2>
         <p class="section-intro">
           Click the bar to expand resume details. Upload your resume PDF and optional resume preview image.
         </p>
 
+        <!-- RESUME DETAILS
+             PDF 路径：assets/resume/Yanghaohong_Annie_Zeng_Resume.pdf
+             预览图片路径：assets/images/resume-preview.jpg -->
         <details>
           <summary>Yanghaohong Annie Zeng — Resume</summary>
           <div class="details-body">
             <div class="details-layout">
+
               <div class="image-box">
                 <img 
                   src="assets/images/resume-preview.jpg" 
@@ -961,15 +1145,22 @@
                   </a>
                 </div>
               </div>
+
             </div>
           </div>
         </details>
       </section>
 
+      <!-- =====================================================
+           CONTACT SECTION
+           Contact：联系信息
+      ====================================================== -->
       <section id="contact">
         <h2>Contact</h2>
 
         <div class="contact-grid">
+
+          <!-- EMAIL CONTACT CARD -->
           <div class="contact-card">
             <strong>Email</strong>
             <a href="mailto:yanghaohongzeng@gmail.com">
@@ -977,6 +1168,7 @@
             </a>
           </div>
 
+          <!-- LINKEDIN CONTACT CARD -->
           <div class="contact-card">
             <strong>LinkedIn</strong>
             <a href="https://www.linkedin.com/in/annie-zeng-706114220/" target="_blank" rel="noopener noreferrer">
@@ -984,26 +1176,36 @@
             </a>
           </div>
 
+          <!-- GITHUB CONTACT CARD -->
           <div class="contact-card">
             <strong>GitHub</strong>
             <a href="https://github.com/Yanghaohong-Annie" target="_blank" rel="noopener noreferrer">
               Yanghaohong-Annie
             </a>
           </div>
+
         </div>
       </section>
 
     </div>
 
+    <!-- =======================================================
+         RIGHT TIMELINE SIDEBAR
+         右侧时间线：展示完成事项和时间节点
+         想添加新节点：复制一个 timeline-item
+    ======================================================== -->
     <aside class="timeline-sidebar" id="timeline">
       <h2>Timeline</h2>
       <p class="timeline-intro">
         A brief overview of my academic, project, and professional milestones.
       </p>
 
+      <!-- TIMELINE SCROLL AREA
+           鼠标移动到右侧 Timeline 上时，这个区域可以单独滚动 -->
       <div class="timeline-scroll" tabindex="0">
         <div class="timeline">
 
+          <!-- TIMELINE ITEM 1 -->
           <div class="timeline-item">
             <div class="timeline-date">June 2026</div>
             <div class="timeline-title">Built Personal Portfolio Website</div>
@@ -1013,6 +1215,7 @@
             <span class="timeline-badge">Personal Website</span>
           </div>
 
+          <!-- TIMELINE ITEM 2 -->
           <div class="timeline-item">
             <div class="timeline-date">May 2026</div>
             <div class="timeline-title">Graduated from UBC</div>
@@ -1022,6 +1225,7 @@
             <span class="timeline-badge">Education</span>
           </div>
 
+          <!-- TIMELINE ITEM 3 -->
           <div class="timeline-item">
             <div class="timeline-date">Spring 2026</div>
             <div class="timeline-title">Completed UBC Capstone Project</div>
@@ -1031,6 +1235,7 @@
             <span class="timeline-badge">Capstone</span>
           </div>
 
+          <!-- TIMELINE ITEM 4 -->
           <div class="timeline-item">
             <div class="timeline-date">2026</div>
             <div class="timeline-title">Completed CHP Analysis Project</div>
@@ -1040,6 +1245,7 @@
             <span class="timeline-badge">Energy Analysis</span>
           </div>
 
+          <!-- TIMELINE ITEM 5 -->
           <div class="timeline-item">
             <div class="timeline-date">2026</div>
             <div class="timeline-title">Completed Carbon Capture Business Case</div>
@@ -1049,6 +1255,7 @@
             <span class="timeline-badge">Business Case</span>
           </div>
 
+          <!-- TIMELINE ITEM 6 -->
           <div class="timeline-item">
             <div class="timeline-date">July – Sept 2023</div>
             <div class="timeline-title">Production Process Technician Intern</div>
@@ -1064,6 +1271,10 @@
 
   </main>
 
+  <!-- =========================================================
+       FOOTER
+       页面底部
+  ========================================================== -->
   <footer>
     <p>© 2026 Yanghaohong (Annie) Zeng. Built with GitHub Pages.</p>
   </footer>
