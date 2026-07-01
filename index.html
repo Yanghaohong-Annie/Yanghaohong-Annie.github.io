@@ -45,7 +45,6 @@
       text-decoration: underline;
     }
 
-    /* Header */
     header {
       background: linear-gradient(135deg, #12355b, #1f6fb2);
       color: white;
@@ -145,7 +144,6 @@
       transform: translateY(-1px);
     }
 
-    /* Navigation */
     nav {
       position: sticky;
       top: 0;
@@ -176,7 +174,6 @@
       color: var(--blue);
     }
 
-    /* Main Layout with Right Timeline */
     main.page-layout {
       max-width: 1280px;
       margin: 35px auto;
@@ -214,7 +211,7 @@
       margin-bottom: 20px;
     }
 
-    /* Timeline Sidebar */
+    /* Right Timeline Sidebar */
     .timeline-sidebar {
       position: sticky;
       top: 82px;
@@ -223,6 +220,10 @@
       padding: 24px;
       box-shadow: var(--shadow);
       border: 1px solid rgba(217, 226, 236, 0.9);
+
+      max-height: calc(100vh - 105px);
+      display: flex;
+      flex-direction: column;
     }
 
     .timeline-sidebar h2 {
@@ -231,12 +232,47 @@
       font-size: 24px;
       padding-bottom: 10px;
       border-bottom: 2px solid var(--light-blue);
+      flex-shrink: 0;
     }
 
     .timeline-intro {
       color: var(--muted);
       font-size: 14px;
       margin: 0 0 18px;
+      flex-shrink: 0;
+    }
+
+    .timeline-scroll {
+      overflow-y: hidden;
+      padding-right: 6px;
+      flex: 1;
+      max-height: calc(100vh - 220px);
+      scrollbar-width: none;
+    }
+
+    .timeline-sidebar:hover .timeline-scroll,
+    .timeline-sidebar:focus-within .timeline-scroll {
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #b7d3ef #f0f6fc;
+    }
+
+    .timeline-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .timeline-scroll::-webkit-scrollbar-track {
+      background: #f0f6fc;
+      border-radius: 999px;
+    }
+
+    .timeline-scroll::-webkit-scrollbar-thumb {
+      background: #b7d3ef;
+      border-radius: 999px;
+    }
+
+    .timeline-scroll::-webkit-scrollbar-thumb:hover {
+      background: var(--blue);
     }
 
     .timeline {
@@ -305,7 +341,6 @@
       font-weight: bold;
     }
 
-    /* Cards */
     .card-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -364,7 +399,6 @@
       z-index: 1;
     }
 
-    /* Collapsible Details */
     details {
       border: 1px solid var(--border);
       border-radius: 14px;
@@ -375,13 +409,12 @@
 
     summary {
       cursor: pointer;
-      padding: 18px 20px;
+      padding: 18px 52px 18px 20px;
       font-weight: bold;
       color: var(--navy);
       background: linear-gradient(90deg, #ffffff, #f4f9ff);
       list-style: none;
       position: relative;
-      padding-right: 52px;
     }
 
     summary::-webkit-details-marker {
@@ -445,7 +478,6 @@
       font-weight: bold;
     }
 
-    /* Resume */
     .resume-actions {
       display: flex;
       flex-wrap: wrap;
@@ -453,7 +485,6 @@
       margin-top: 16px;
     }
 
-    /* Contact */
     .contact-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -481,7 +512,6 @@
       font-size: 14px;
     }
 
-    /* Mobile */
     @media (max-width: 980px) {
       main.page-layout {
         grid-template-columns: 1fr;
@@ -489,6 +519,17 @@
 
       .timeline-sidebar {
         position: static;
+        max-height: none;
+      }
+
+      .timeline-scroll {
+        max-height: none;
+        overflow-y: visible;
+      }
+
+      .timeline-sidebar:hover .timeline-scroll,
+      .timeline-sidebar:focus-within .timeline-scroll {
+        overflow-y: visible;
       }
     }
 
@@ -583,7 +624,6 @@
 
     <div class="main-content">
 
-      <!-- ABOUT -->
       <section id="about">
         <h2>About Me</h2>
         <p>
@@ -597,7 +637,6 @@
         </p>
       </section>
 
-      <!-- EDUCATION -->
       <section id="education">
         <h2>Education</h2>
         <p class="section-intro">
@@ -651,7 +690,6 @@
         </div>
       </section>
 
-      <!-- EXPERIENCE -->
       <section id="experience">
         <h2>Experience</h2>
         <p class="section-intro">
@@ -713,7 +751,6 @@
         </details>
       </section>
 
-      <!-- PROJECTS -->
       <section id="projects">
         <h2>Projects</h2>
         <p class="section-intro">
@@ -802,7 +839,6 @@
         </details>
       </section>
 
-      <!-- SKILLS -->
       <section id="skills">
         <h2>Skills</h2>
         <p class="section-intro">
@@ -828,7 +864,6 @@
         </div>
       </section>
 
-      <!-- CERTIFICATES -->
       <section id="certificates">
         <h2>Certificates</h2>
         <p class="section-intro">
@@ -886,7 +921,6 @@
         </details>
       </section>
 
-      <!-- RESUME -->
       <section id="resume">
         <h2>Resume</h2>
         <p class="section-intro">
@@ -932,7 +966,6 @@
         </details>
       </section>
 
-      <!-- CONTACT -->
       <section id="contact">
         <h2>Contact</h2>
 
@@ -962,69 +995,70 @@
 
     </div>
 
-    <!-- RIGHT TIMELINE SIDEBAR -->
     <aside class="timeline-sidebar" id="timeline">
       <h2>Timeline</h2>
       <p class="timeline-intro">
         A brief overview of my academic, project, and professional milestones.
       </p>
 
-      <div class="timeline">
+      <div class="timeline-scroll" tabindex="0">
+        <div class="timeline">
 
-        <div class="timeline-item">
-          <div class="timeline-date">June 2026</div>
-          <div class="timeline-title">Built Personal Portfolio Website</div>
-          <p class="timeline-text">
-            Started building a professional GitHub Pages website for job applications and project presentation.
-          </p>
-          <span class="timeline-badge">Personal Website</span>
+          <div class="timeline-item">
+            <div class="timeline-date">June 2026</div>
+            <div class="timeline-title">Built Personal Portfolio Website</div>
+            <p class="timeline-text">
+              Started building a professional GitHub Pages website for job applications and project presentation.
+            </p>
+            <span class="timeline-badge">Personal Website</span>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">May 2026</div>
+            <div class="timeline-title">Graduated from UBC</div>
+            <p class="timeline-text">
+              Completed BASc studies in Chemical and Biological Engineering.
+            </p>
+            <span class="timeline-badge">Education</span>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Spring 2026</div>
+            <div class="timeline-title">Completed UBC Capstone Project</div>
+            <p class="timeline-text">
+              Developed a green diesel production facility design with process documentation and feasibility analysis.
+            </p>
+            <span class="timeline-badge">Capstone</span>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2026</div>
+            <div class="timeline-title">Completed CHP Analysis Project</div>
+            <p class="timeline-text">
+              Conducted thermodynamic and exergoeconomic analysis of a diesel engine CHP system.
+            </p>
+            <span class="timeline-badge">Energy Analysis</span>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2026</div>
+            <div class="timeline-title">Completed Carbon Capture Business Case</div>
+            <p class="timeline-text">
+              Evaluated CAPEX, OPEX, carbon pricing, and feasibility for an on-site carbon capture project.
+            </p>
+            <span class="timeline-badge">Business Case</span>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">July – Sept 2023</div>
+            <div class="timeline-title">Production Process Technician Intern</div>
+            <p class="timeline-text">
+              Supported process monitoring, equipment inspection, workflow improvement, and safety procedures.
+            </p>
+            <span class="timeline-badge">Internship</span>
+          </div>
+
         </div>
-
-        <div class="timeline-item">
-          <div class="timeline-date">May 2026</div>
-          <div class="timeline-title">Graduated from UBC</div>
-          <p class="timeline-text">
-            Completed BASc studies in Chemical and Biological Engineering.
-          </p>
-          <span class="timeline-badge">Education</span>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-date">Spring 2026</div>
-          <div class="timeline-title">Completed UBC Capstone Project</div>
-          <p class="timeline-text">
-            Developed a green diesel production facility design with process documentation and feasibility analysis.
-          </p>
-          <span class="timeline-badge">Capstone</span>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-date">2026</div>
-          <div class="timeline-title">Completed CHP Analysis Project</div>
-          <p class="timeline-text">
-            Conducted thermodynamic and exergoeconomic analysis of a diesel engine CHP system.
-          </p>
-          <span class="timeline-badge">Energy Analysis</span>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-date">2026</div>
-          <div class="timeline-title">Completed Carbon Capture Business Case</div>
-          <p class="timeline-text">
-            Evaluated CAPEX, OPEX, carbon pricing, and feasibility for an on-site carbon capture project.
-          </p>
-          <span class="timeline-badge">Business Case</span>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-date">July – Sept 2023</div>
-          <div class="timeline-title">Production Process Technician Intern</div>
-          <p class="timeline-text">
-            Supported process monitoring, equipment inspection, workflow improvement, and safety procedures.
-          </p>
-          <span class="timeline-badge">Internship</span>
-        </div>
-
       </div>
     </aside>
 
